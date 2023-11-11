@@ -33,6 +33,7 @@ ReadPuzzle = Puzzle(N, pos, check=1)
 print("this is input:")
 ReadPuzzle.show()
 print("wanna change it? press arrow keys and then `ESC` or `ENTER`")
+print("for randomizing press 'TAB`")
 with Listener(on_release=partial(on_release, ReadPuzzle)) as lis:
     lis.join()
 with inputfile.open("w", **encdic) as fp:

@@ -76,7 +76,6 @@ def AStar(puz: "Puzzle") -> list["Puzzle"]:
             if ns in closed:
                 continue
             if ns in opened:
-                print("yo")
                 move_g, move_h = opened[ns]
                 if move_g <= node.g:
                     #! same child-node but in lower depth, so don't open it later
