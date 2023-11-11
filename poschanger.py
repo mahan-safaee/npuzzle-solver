@@ -1,3 +1,4 @@
+"change puzzle on arrow-key press"
 from pynput.keyboard import Key
 
 try:
@@ -9,6 +10,7 @@ namedic = dict(up="bottom", down="top", left="right", right="left")
 
 
 def on_release(puz: "Puzzle", key: Key):
+    """handle key release"""
     if not isinstance(key, Key):
         return
     if key in (Key.esc, Key.enter, Key):

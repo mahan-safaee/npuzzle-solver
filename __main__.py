@@ -1,3 +1,4 @@
+"main file"
 import sys
 from typing import Callable
 from datetime import datetime
@@ -24,8 +25,9 @@ def get_int(prompt: str = "") -> int:
     return int(inp)
 
 
+encdic = dict(encoding="utf8")
 inputfile = Path(__file__).with_name("input.txt")
-with inputfile.open() as fp:
+with inputfile.open(**encdic) as fp:
     N, *pos = list(map(int, fp.read().replace(*"\n ").split()))
 ReadPuzzle = Puzzle(N, pos, check=1)
 print("this is input:")
@@ -33,11 +35,11 @@ ReadPuzzle.show()
 print("wanna change it? press arrow keys and then `ESC` or `ENTER`")
 with Listener(on_release=partial(on_release, ReadPuzzle)) as lis:
     lis.join()
-with inputfile.open("w") as fp:
+with inputfile.open("w", **encdic) as fp:
     print(N, file=fp)
     ReadPuzzle.show(fp)
 
-s = (
+s: tuple[str] = (
     "",
     "1:\tA* (manhattan)",
     "2:\tA* (hamming)",
@@ -77,7 +79,7 @@ t = datetime.now() - t
 tt = f"{t.total_seconds():.5f}"
 print(len(steps))
 now = ReadPuzzle
-with inputfile.with_stem("output").open("w") as fp:
+with inputfile.with_stem("output").open("w", **encdic) as fp:
     for i, step in enumerate(steps, 1):
         print(i, "-", sep=" ", end="\t")
         print(now[step.empty_pos], "to the", step.prev)
